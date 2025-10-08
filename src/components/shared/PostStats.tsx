@@ -14,7 +14,7 @@ function PostStats({post, userId}:PostStatsProps) {
     const {mutateAsync:savePost, isPending:isSavingPost} = useSavePosts();
     const {mutateAsync:deleteSavedPost, isPending:isDeletingSavedPost} = useDeleteSavePosts();
     const {data:currentUser} = useGetCurrentUser();
-    const likesList = post?.likes.map((user:Models.Document)=>user?.$id);
+    const likesList = post?.likes?.map((user:Models.Document)=>user?.$id);
 
     const [likes, setLikes] = useState(likesList);
     const [isSaved, setIsSaved] = useState(false);
@@ -53,7 +53,7 @@ function PostStats({post, userId}:PostStatsProps) {
     <div className='flex justify-between z-20 items-center'>
       <div className='flex gap-2 mr-5'>
         <img src={checkIsLiked(likes, userId)?'/assets/icons/liked.svg':'/assets/icons/like.svg'} alt="like" width={20} height={20} onClick={handleLikePost} className='cursor-pointer'/>
-        <p className='small-medium lg:base-medium'>{likes.length}</p>
+        <p className='small-medium lg:base-medium'>{likes?.length}</p>
       </div>
 
       <div className='flex gap-2'>
